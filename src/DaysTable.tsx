@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface DaysTableProps {
   year?: number;
   month?: number;
@@ -8,10 +10,30 @@ export default function DaysTable({
   month = new Date().getMonth(),
   notes = "",
 }: DaysTableProps) {
+  const monthDays = [
+    ...new Array(new Date(year, month + 1, 0).getDate()).keys(),
+  ].map((i) => {
+    const date = new Date(year, month, i + 1);
+    let text: ReactNode = "";
+    if (date.getDay() === 0) {
+      text = <strong>DOMINGO</strong>;
+    } else if (date.getDay() === 6) {
+      text = <strong>SÁBADO</strong>;
+    }
+    return {
+      date,
+      text,
+    };
+  });
   return (
     <table
       border={1}
-      style={{ marginLeft: "auto", marginRight: "auto", width: "700px" }}
+      style={{
+        marginLeft: "auto",
+        marginRight: "auto",
+        width: "700px",
+        fontFamily: "Arial, Helvetica, sans-serif",
+      }}
     >
       <thead>
         <tr
@@ -27,7 +49,7 @@ export default function DaysTable({
         </tr>
         <tr
           style={{
-            backgroundColor: "rgb(221, 221, 221)",
+            backgroundColor: "rgb(231, 231, 231)",
             textAlign: "center",
             fontWeight: "bold",
           }}
@@ -39,282 +61,16 @@ export default function DaysTable({
         </tr>
       </thead>
       <tbody style={{ textAlign: "center" }}>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>1</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>2</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>3</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-          <td>4</td>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-          <td>5</td>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>6</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>7</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>8</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>9</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>10</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-          <td>11</td>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-          <td>12</td>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>13</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>14</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>15</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>16</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>17</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-          <td>18</td>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-          <td>19</td>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <strong>FERIADO</strong>
-          </td>
-          <td>
-            <strong>FERIADO</strong>
-          </td>
-          <td>20</td>
-          <td>
-            <strong>FERIADO</strong>
-          </td>
-          <td>
-            <strong>FERIADO</strong>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <strong>FERIADO</strong>
-          </td>
-          <td>
-            <strong>FERIADO</strong>
-          </td>
-          <td>21</td>
-          <td>
-            <strong>FERIADO</strong>
-          </td>
-          <td>
-            <strong>FERIADO</strong>
-          </td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>22</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>23</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td>12:00</td>
-          <td>24</td>
-          <td>14:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-          <td>25</td>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-          <td>
-            <strong>SÁBADO</strong>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-          <td>26</td>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-          <td>
-            <strong>DOMINGO</strong>
-          </td>
-        </tr>
-        <tr>
-          <td>08:00</td>
-          <td></td>
-          <td>27</td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td>28</td>
-          <td></td>
-          <td></td>
-        </tr>
+        {monthDays.map((v) => (
+          <tr key={v.date.toString()}>
+            <td>{v.text}</td>
+            <td>{v.text}</td>
+            <td>{v.date.getDate().toString().padStart(2, "0")}</td>
+            <td>{v.text}</td>
+            <td>{v.text}</td>
+          </tr>
+        ))}
+
         <tr>
           <td colSpan={5}>{notes}&nbsp;</td>
         </tr>
