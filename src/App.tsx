@@ -7,9 +7,10 @@ import prettier from "prettier/standalone";
 import htmlParser from "prettier/parser-html";
 import Settings from "./Settings";
 import HeaderTable from "./HeaderTable";
+import { FreqData } from "./interfaces";
 
 function App() {
-  const settings = {
+  const initialSettings = {
     servidor: "",
     cargo: "",
     funcao: "N/C",
@@ -19,11 +20,11 @@ function App() {
     setor: "",
     matricula: "",
   };
+  const [settings, setSettings] = useState<FreqData>(initialSettings);
   const [count, setCount] = useState(0);
   const returnHtml = (
     <>
       <HeaderTable {...settings} />
-      <br />
       <DaysTable />
     </>
   );
@@ -36,13 +37,16 @@ function App() {
   return (
     <div className="App">
       <h2>Configuração</h2>
-      <Settings />
+      <Settings OnChange={setSettings} initialValues={initialSettings} />
       <h2>Preview:</h2>
-      {returnHtml}
+      <div className="all-initial">
+        <div>{returnHtml}</div>
+      </div>
       <h2>HTML:</h2>
-      <textarea style={{ width: "100%", height: "30em" }}>
-        {formattedHtml}
-      </textarea>
+      <textarea
+        style={{ width: "100%", height: "30em" }}
+        value={formattedHtml}
+      />
     </div>
   );
 }

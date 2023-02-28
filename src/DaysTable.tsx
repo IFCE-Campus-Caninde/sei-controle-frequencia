@@ -33,6 +33,8 @@ export default function DaysTable({
         marginRight: "auto",
         width: "700px",
         fontFamily: "Arial, Helvetica, sans-serif",
+        border: "2px solid black",
+        borderCollapse: "collapse",
       }}
     >
       <thead>
@@ -43,9 +45,15 @@ export default function DaysTable({
             fontWeight: "bold",
           }}
         >
-          <td colSpan={2}>1&ordm; TURNO</td>
-          <td rowSpan={2}>DIA</td>
-          <td colSpan={2}>2&ordm; TURNO</td>
+          <td colSpan={2} style={{ padding: "0.2em" }}>
+            1º TURNO
+          </td>
+          <td rowSpan={2} style={{ padding: "0.2em" }}>
+            DIA
+          </td>
+          <td colSpan={2} style={{ padding: "0.2em" }}>
+            2º TURNO
+          </td>
         </tr>
         <tr
           style={{
@@ -54,10 +62,10 @@ export default function DaysTable({
             fontWeight: "bold",
           }}
         >
-          <td>ENTRADA</td>
-          <td>SA&Iacute;DA</td>
-          <td>ENTRADA</td>
-          <td>SA&Iacute;DA</td>
+          <td style={{ padding: "0.2em" }}>ENTRADA</td>
+          <td style={{ padding: "0.2em" }}>SAÍDA</td>
+          <td style={{ padding: "0.2em" }}>ENTRADA</td>
+          <td style={{ padding: "0.2em" }}>SAÍDA</td>
         </tr>
       </thead>
       <tbody style={{ textAlign: "center" }}>
