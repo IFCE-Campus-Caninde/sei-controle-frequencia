@@ -94,7 +94,10 @@ function App() {
         <ul className="text-left list-disc pl-6">
           <li>Preencha seus dados na seção "Configuração".</li>
           <li>Selecione o mês e ano.</li>
-          <li>Copie o código HTML gerado e cole no documento do SEI.</li>
+          <li>
+            Copie o código HTML gerado e cole no documento do SEI (no modo
+            "Código Fonte").
+          </li>
         </ul>
       </div>
       <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
