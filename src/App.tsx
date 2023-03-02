@@ -10,24 +10,59 @@ import HeaderTable from "./HeaderTable";
 import { FreqData, MonthData } from "./interfaces";
 import TableSettings from "./TableSettings";
 
+const initialSettings: FreqData = {
+  servidor: "",
+  cargo: "",
+  funcao: "N/C",
+  horario: "",
+  jornada: "40 horas",
+  lotacao: "Campus Canindé",
+  setor: "",
+  matricula: "",
+};
+
+interface SettingsStorage {
+  settings: FreqData;
+  additional: { newStyle?: boolean };
+}
+
+function getSettings(): SettingsStorage {
+  let settings: FreqData = initialSettings;
+  let additional = { newStyle: true };
+  try {
+    const set1 = localStorage.getItem("settings");
+    if (set1) {
+      settings = JSON.parse(set1);
+    }
+    const set2 = localStorage.getItem("additional");
+    if (set2) {
+      additional = JSON.parse(set2);
+    }
+  } catch (e) {}
+
+  console.log(settings, additional);
+  return { settings, additional };
+}
+
+function saveSettings({ settings, additional }: SettingsStorage): void {
+  try {
+    localStorage.setItem("settings", JSON.stringify(settings));
+    localStorage.setItem("additional", JSON.stringify(additional));
+  } catch (e) {}
+}
+
 function App() {
-  const initialSettings: FreqData = {
-    servidor: "",
-    cargo: "",
-    funcao: "N/C",
-    horario: "",
-    jornada: "40 horas",
-    lotacao: "Campus Canindé",
-    setor: "",
-    matricula: "",
-  };
+  const store = getSettings();
+
   const initialMonthData: MonthData = {
-    newStyle: true,
+    newStyle: store.additional.newStyle,
     month: new Date().getMonth(),
     year: new Date().getFullYear(),
   };
-  const [settings, setSettings] = useState<FreqData>(initialSettings);
+  const [settings, setSettings] = useState<FreqData>(store.settings);
   const [month, setMonth] = useState<MonthData>(initialMonthData);
+
+  saveSettings({ settings, additional: { newStyle: month.newStyle } });
 
   const returnHtml = useMemo(
     () => (
@@ -53,7 +88,7 @@ function App() {
       <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2 mb-2">
         Configuração
       </h2>
-      <Settings OnChange={setSettings} initialValues={initialSettings} />
+      <Settings OnChange={setSettings} initialValues={settings} />
       <TableSettings OnChange={setMonth} initialValues={initialMonthData} />
       <div className="lg:flex gap-4">
         <div>
