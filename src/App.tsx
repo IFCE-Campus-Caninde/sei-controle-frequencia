@@ -132,10 +132,11 @@ function App() {
               {copied ? "Copiado!" : "Copiar"}
             </button>
           </h2>
-          <div className="border-2 border-slate-500 mb-2 p-2 h-full bg-white overflow-auto">
+          <div className="border-2 border-slate-500 mb-2 p-2 h-full bg-white overflow-x-auto overflow-y-hidden">
             <textarea
               className="w-full lg:h-full h-96 border-slate-400 border-2 p-2 lg:resize-none"
               value={formattedHtml}
+              disabled={true}
             />
           </div>
         </div>
