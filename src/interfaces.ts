@@ -8,3 +8,8 @@ export interface FreqData {
   setor: string;
   horario: string;
 }
+export interface MonthData {
+  month: number;
+  year: number;
+  newStyle?: boolean;
+}

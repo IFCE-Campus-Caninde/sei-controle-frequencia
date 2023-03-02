@@ -1,7 +1,10 @@
 import { FreqData } from "./interfaces";
 
-export interface HeaderTableProps extends FreqData {}
+export interface HeaderTableProps extends FreqData {
+  newStyle?: boolean;
+}
 export default function HeaderTable(data: HeaderTableProps) {
+  const { newStyle } = data;
   return (
     <table
       border={1}
@@ -11,7 +14,7 @@ export default function HeaderTable(data: HeaderTableProps) {
         width: "700px",
         fontFamily: "Arial, Helvetica, sans-serif",
         border: "2px solid black",
-        borderCollapse: "collapse",
+        borderCollapse: newStyle ? "collapse" : "separate",
         marginBottom: "1em",
       }}
     >

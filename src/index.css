@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-td {
+.new-style table td {
   border: 1px solid;
 }

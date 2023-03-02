@@ -1,17 +1,21 @@
 import { ReactNode } from "react";
+import { getDaysInMonth } from "date-fns";
 
 export interface DaysTableProps {
   year?: number;
   month?: number;
   notes?: string;
+  newStyle?: boolean;
 }
+
 export default function DaysTable({
   year = new Date().getFullYear(),
   month = new Date().getMonth(),
   notes = "",
+  newStyle = true,
 }: DaysTableProps) {
   const monthDays = [
-    ...new Array(new Date(year, month + 1, 0).getDate()).keys(),
+    ...new Array(getDaysInMonth(new Date(year, month))).keys(),
   ].map((i) => {
     const date = new Date(year, month, i + 1);
     let text: ReactNode = "";
@@ -34,7 +38,7 @@ export default function DaysTable({
         width: "700px",
         fontFamily: "Arial, Helvetica, sans-serif",
         border: "2px solid black",
-        borderCollapse: "collapse",
+        borderCollapse: newStyle ? "collapse" : "separate",
       }}
     >
       <thead>
