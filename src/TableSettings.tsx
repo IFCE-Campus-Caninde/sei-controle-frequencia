@@ -46,7 +46,12 @@ export default function TableSettings({
             }}
           >
             <div className="flex">
-              <FormField name="year" label="Ano" placeholder="Ex: 2023" />
+              <FormField
+                name="year"
+                type="number"
+                label="Ano"
+                placeholder="Ex: 2023"
+              />
               <FormFieldSelectProps
                 name="month"
                 label="Mês"

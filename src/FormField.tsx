@@ -4,6 +4,7 @@ export interface FormFieldProps {
   name: string;
   label: string;
   placeholder?: string;
+  type?: string;
 }
 
 export interface FormFieldSelectProps {
@@ -16,6 +17,7 @@ export default function FormField({
   name,
   label,
   placeholder = "",
+  type,
 }: FormFieldProps) {
   return (
     <div className="block">
@@ -27,6 +29,7 @@ export default function FormField({
       </label>
       <Field
         className="text-gray-700 text-sm mb-2 w-52 lg:w-80 p-1 bg-slate-100"
+        type={type}
         id={name}
         name={name}
         placeholder={placeholder}
