@@ -90,7 +90,7 @@ function App() {
       <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
         Como usar
       </h2>
-      <div className="border-2 border-slate-500 mb-2 p-2 bg-white">
+      <div className="border-2 border-slate-500 mb-2 p-2 bg-white overflow-auto">
         <ul className="text-left list-disc pl-6">
           <li>Preencha seus dados na seção "Configuração".</li>
           <li>Selecione o mês e ano.</li>
@@ -103,7 +103,7 @@ function App() {
       <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
         Configuração
       </h2>
-      <div className="border-2 border-slate-500 mb-2 p-2 bg-white">
+      <div className="border-2 border-slate-500 mb-2 p-2 bg-white overflow-auto">
         <Settings OnChange={setSettings} initialValues={settings} />
         <TableSettings OnChange={setMonth} initialValues={initialMonthData} />
       </div>
@@ -113,7 +113,7 @@ function App() {
           <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
             Preview:
           </h2>
-          <div className="border-2 border-slate-500 mb-2 p-2 bg-white">
+          <div className="border-2 border-slate-500 mb-2 p-2 bg-white overflow-auto">
             <div className="all-initial">
               <div className="new-style">{returnHtml}</div>
             </div>
@@ -132,7 +132,7 @@ function App() {
               {copied ? "Copiado!" : "Copiar"}
             </button>
           </h2>
-          <div className="border-2 border-slate-500 mb-2 p-2 h-full bg-white">
+          <div className="border-2 border-slate-500 mb-2 p-2 h-full bg-white overflow-auto">
             <textarea
               className="w-full lg:h-full h-96 border-slate-400 border-2 p-2 lg:resize-none"
               value={formattedHtml}
