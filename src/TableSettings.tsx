@@ -39,7 +39,6 @@ export default function TableSettings({
         {(formik) => (
           <Form
             className="text-left"
-            style={{ width: "700px" }}
             onChange={(e) => {
               formik.setSubmitting(true);
               formik.submitForm();

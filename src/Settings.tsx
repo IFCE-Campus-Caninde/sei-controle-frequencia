@@ -21,7 +21,6 @@ export default function Settings({ initialValues, OnChange }: SettingsProps) {
         {(formik) => (
           <Form
             className="text-left"
-            style={{ width: "700px" }}
             onChange={(e) => {
               formik.setSubmitting(true);
               formik.submitForm();
