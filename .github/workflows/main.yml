@@ -16,6 +16,8 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build site
+        env:
+          VITE_BASE_URL: "/${{ github.repository#substring(0, github.repository.indexOf('/')) }}/${{ github.repository#substring(github.repository.indexOf('/') + 1) }}/"
         run: yarn build
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
