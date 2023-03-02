@@ -90,7 +90,7 @@ function App() {
       <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
         Como usar
       </h2>
-      <div className="border-2 border-slate-500 mb-2 p-2">
+      <div className="border-2 border-slate-500 mb-2 p-2 bg-white">
         <ul className="text-left list-disc pl-6">
           <li>Preencha seus dados na seção "Configuração".</li>
           <li>Selecione o mês e ano.</li>
@@ -103,17 +103,17 @@ function App() {
       <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
         Configuração
       </h2>
-      <div className="border-2 border-slate-500 mb-2 p-2">
+      <div className="border-2 border-slate-500 mb-2 p-2 bg-white">
         <Settings OnChange={setSettings} initialValues={settings} />
         <TableSettings OnChange={setMonth} initialValues={initialMonthData} />
       </div>
 
-      <div className="flex lg:flex-row flex-col gap-4 items-stretch">
+      <div className="flex lg:flex-row flex-col gap-2 items-stretch">
         <div>
           <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
             Preview:
           </h2>
-          <div className="border-2 border-slate-500 mb-2 p-2">
+          <div className="border-2 border-slate-500 mb-2 p-2 bg-white">
             <div className="all-initial">
               <div className="new-style">{returnHtml}</div>
             </div>
@@ -123,7 +123,7 @@ function App() {
           <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
             HTML:{" "}
             <button
-              className="bg-slate-300 px-2 rounded-md text-sm text-slate-800"
+              className="bg-slate-300 px-2 rounded-md text-sm text-slate-800 "
               onClick={() => {
                 setCopied(true);
                 navigator.clipboard.writeText(formattedHtml);
@@ -132,7 +132,7 @@ function App() {
               {copied ? "Copiado!" : "Copiar"}
             </button>
           </h2>
-          <div className="border-2 border-slate-500 mb-2 p-2 h-full">
+          <div className="border-2 border-slate-500 mb-2 p-2 h-full bg-white">
             <textarea
               className="w-full lg:h-full h-96 border-slate-400 border-2 p-2 lg:resize-none"
               value={formattedHtml}
