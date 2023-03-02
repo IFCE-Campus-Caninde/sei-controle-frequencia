@@ -61,11 +61,14 @@ function App() {
   };
   const [settings, setSettings] = useState<FreqData>(store.settings);
   const [month, setMonth] = useState<MonthData>(initialMonthData);
+  const [copied, setCopied] = useState<boolean>(false);
 
-  saveSettings({ settings, additional: { newStyle: month.newStyle } });
+  //saveSettings({ settings, additional: { newStyle: month.newStyle } });
 
-  const returnHtml = useMemo(
-    () => (
+  const returnHtml = useMemo(() => {
+    saveSettings({ settings, additional: { newStyle: month.newStyle } });
+    setCopied(false);
+    return (
       <>
         <HeaderTable {...settings} newStyle={month.newStyle} />
         <DaysTable
@@ -74,9 +77,8 @@ function App() {
           newStyle={month.newStyle}
         />
       </>
-    ),
-    [month, settings]
-  );
+    );
+  }, [month, settings]);
   const htmlString = ReactDOMServer.renderToString(returnHtml);
   const formattedHtml = prettier.format(htmlString, {
     parser: "html",
@@ -85,37 +87,58 @@ function App() {
 
   return (
     <div className="App">
-      <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2 mb-2">
+      <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
+        Como usar
+      </h2>
+      <div className="border-2 border-slate-500 mb-2 p-2">
+        <ul className="text-left list-disc pl-6">
+          <li>Preencha seus dados na seção "Configuração".</li>
+          <li>Selecione o mês e ano.</li>
+          <li>Copie o código HTML gerado e cole no documento do SEI.</li>
+        </ul>
+      </div>
+      <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
         Configuração
       </h2>
-      <Settings OnChange={setSettings} initialValues={settings} />
-      <TableSettings OnChange={setMonth} initialValues={initialMonthData} />
-      <div className="lg:flex gap-4">
+      <div className="border-2 border-slate-500 mb-2 p-2">
+        <Settings OnChange={setSettings} initialValues={settings} />
+        <TableSettings OnChange={setMonth} initialValues={initialMonthData} />
+      </div>
+
+      <div className="flex lg:flex-row flex-col gap-4 items-stretch">
         <div>
-          <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2 mb-2">
+          <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
             Preview:
           </h2>
-          <div className="all-initial">
-            <div className="new-style">{returnHtml}</div>
+          <div className="border-2 border-slate-500 mb-2 p-2">
+            <div className="all-initial">
+              <div className="new-style">{returnHtml}</div>
+            </div>
           </div>
         </div>
-        <div className="w-full">
-          <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2 mb-2">
+        <div className="w-full flex flex-col">
+          <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
             HTML:{" "}
             <button
               className="bg-slate-300 px-2 rounded-md text-sm text-slate-800"
               onClick={() => {
+                setCopied(true);
                 navigator.clipboard.writeText(formattedHtml);
               }}
             >
-              Copiar
+              {copied ? "Copiado!" : "Copiar"}
             </button>
           </h2>
-          <textarea
-            className="w-full h-96 border-2 border-slate-500 p-2"
-            value={formattedHtml}
-          />
+          <div className="border-2 border-slate-500 mb-2 p-2 h-full">
+            <textarea
+              className="w-full lg:h-full h-96 border-slate-400 border-2 p-2 lg:resize-none"
+              value={formattedHtml}
+            />
+          </div>
         </div>
+      </div>
+      <div className="">
+        Feito com ❤️ por Carlos Alberto Castelo @ IFCE <em>Campus</em> Canindé
       </div>
     </div>
   );
