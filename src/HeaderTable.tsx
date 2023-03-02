@@ -12,10 +12,16 @@ export default function HeaderTable(data: HeaderTableProps) {
         marginLeft: "auto",
         marginRight: "auto",
         width: "700px",
-        fontFamily: "Arial, Helvetica, sans-serif",
+        fontFamily: newStyle
+          ? "Arial, Helvetica, sans-serif"
+          : "Times New Roman, Times, serif",
         border: "2px solid black",
+        fontSize: newStyle ? "0.9em" : "1em",
+        lineHeight: "1.2em",
         borderCollapse: newStyle ? "collapse" : "separate",
         marginBottom: "1em",
+        //tableLayout: "fixed",
+        whiteSpace: "nowrap",
       }}
     >
       <tbody style={{ textAlign: "left" }}>
@@ -30,7 +36,14 @@ export default function HeaderTable(data: HeaderTableProps) {
           </td>
         </tr>
         <tr>
-          <td style={{ border: "none", width: 0, paddingLeft: "0.5em" }}>
+          <td
+            style={{
+              border: "none",
+              width: 0,
+              paddingLeft: "0.5em",
+              paddingBottom: "0.2em",
+            }}
+          >
             <strong>SERVIDOR:</strong>
           </td>
           <td style={{ border: "none" }}>{data.servidor}</td>
@@ -40,7 +53,13 @@ export default function HeaderTable(data: HeaderTableProps) {
           <td style={{ border: "none" }}>{data.matricula}</td>
         </tr>
         <tr>
-          <td style={{ border: "none", paddingLeft: "0.5em" }}>
+          <td
+            style={{
+              border: "none",
+              paddingLeft: "0.5em",
+              paddingBottom: "0.2em",
+            }}
+          >
             <strong>CARGO:</strong>
           </td>
           <td style={{ border: "none" }}>{data.cargo}</td>
@@ -50,7 +69,13 @@ export default function HeaderTable(data: HeaderTableProps) {
           <td style={{ border: "none" }}>{data.funcao}</td>
         </tr>
         <tr>
-          <td style={{ border: "none", paddingLeft: "0.5em" }}>
+          <td
+            style={{
+              border: "none",
+              paddingLeft: "0.5em",
+              paddingBottom: "0.2em",
+            }}
+          >
             <strong>LOTAÇÃO:</strong>
           </td>
           <td style={{ border: "none" }}>{data.lotacao}</td>
@@ -60,7 +85,13 @@ export default function HeaderTable(data: HeaderTableProps) {
           <td style={{ border: "none" }}>{data.jornada}</td>
         </tr>
         <tr>
-          <td style={{ border: "none", paddingLeft: "0.5em" }}>
+          <td
+            style={{
+              border: "none",
+              paddingLeft: "0.5em",
+              paddingBottom: "0.2em",
+            }}
+          >
             <strong>SETOR:</strong>
           </td>
           <td style={{ border: "none" }}>{data.setor}</td>

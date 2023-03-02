@@ -101,7 +101,15 @@ function App() {
         </div>
         <div className="w-full">
           <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2 mb-2">
-            HTML:
+            HTML:{" "}
+            <button
+              className="bg-slate-300 px-2 rounded-md text-sm text-slate-800"
+              onClick={() => {
+                navigator.clipboard.writeText(formattedHtml);
+              }}
+            >
+              Copiar
+            </button>
           </h2>
           <textarea
             className="w-full h-96 border-2 border-slate-500 p-2"

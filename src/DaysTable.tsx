@@ -36,7 +36,9 @@ export default function DaysTable({
         marginLeft: "auto",
         marginRight: "auto",
         width: "700px",
-        fontFamily: "Arial, Helvetica, sans-serif",
+        fontFamily: newStyle
+          ? "Arial, Helvetica, sans-serif"
+          : "Times New Roman, Times, serif",
         border: "2px solid black",
         borderCollapse: newStyle ? "collapse" : "separate",
       }}
