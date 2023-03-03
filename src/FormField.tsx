@@ -22,13 +22,13 @@ export default function FormField({
   return (
     <div className="block">
       <label
-        className="text-gray-700 text-sm font-bold mb-2 mx-2 inline-block w-32 lg:text-right"
+        className="text-gray-700 text-sm font-bold mb-2 mx-2 inline-block w-32 lg:text-right dark:text-slate-400"
         htmlFor={name}
       >
         {label}
       </label>
       <Field
-        className="text-gray-700 text-sm mb-2 w-52 lg:w-80 p-1 bg-slate-100"
+        className="text-gray-700 text-sm mb-2 w-40 lg:w-80 p-1 bg-slate-100"
         type={type}
         id={name}
         name={name}
@@ -42,7 +42,7 @@ export function FormFieldCheck({ name, label }: FormFieldProps) {
   return (
     <div className="block">
       <label
-        className="text-gray-700 text-sm font-bold mb-2 mx-2 inline-block w-32 lg:text-right"
+        className="text-gray-700 text-sm font-bold mb-2 mx-2 inline-block w-32 lg:text-right dark:text-slate-400"
         htmlFor={name}
       >
         {label}
@@ -65,14 +65,14 @@ export function FormFieldSelectProps({
   return (
     <div className="block">
       <label
-        className="text-gray-700 text-sm font-bold mb-2 mx-2 inline-block w-32 lg:text-right"
+        className="text-gray-700 text-sm font-bold mb-2 mx-2 inline-block w-32 lg:text-right dark:text-slate-400"
         htmlFor={name}
       >
         {label}
       </label>
       <Field
         as="select"
-        className="text-gray-700 text-sm mb-2 w-52 lg:w-80 p-1 bg-slate-100"
+        className="text-gray-700 text-sm mb-2 w-40 lg:w-80 p-1 bg-slate-100"
         id={name}
         name={name}
       >

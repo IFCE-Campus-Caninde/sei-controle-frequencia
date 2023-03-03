@@ -131,19 +131,6 @@ function App() {
   return (
     <div className="App">
       <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
-        Como usar
-      </h2>
-      <div className="border-2 border-slate-500 mb-2 p-2 bg-white overflow-auto">
-        <ul className="text-left list-disc pl-6">
-          <li>Preencha seus dados na seção "Configuração".</li>
-          <li>Selecione o mês e ano.</li>
-          <li>
-            Copie o código HTML gerado e cole no documento do SEI (no modo
-            "Código Fonte").
-          </li>
-        </ul>
-      </div>
-      <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
         <div className="lg:absolute flex-row flex items-center justify-center lg:justify-start h-8">
           <button
             className="px-1 text-center align-middle mr-1 hover:text-green-400"
@@ -177,7 +164,7 @@ function App() {
         </div>
         Configuração
       </h2>
-      <div className="border-2 border-slate-500 mb-2 p-2 bg-white overflow-auto">
+      <div className="border-2 border-slate-500 mb-2 p-2 bg-white dark:bg-slate-800 overflow-auto">
         <Settings OnChange={onChangeSettingHandler} initialValues={settings} />
         <TableSettings OnChange={setMonth} initialValues={initialMonthData} />
       </div>
@@ -187,9 +174,9 @@ function App() {
           <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
             Preview:
           </h2>
-          <div className="border-2 border-slate-500 mb-2 p-2 bg-white overflow-auto">
+          <div className="border-2 border-slate-500 mb-2 p-2 bg-white dark:bg-slate-800 overflow-auto">
             <div className="all-initial">
-              <div className="new-style">{returnHtml}</div>
+              <div className="new-style preview">{returnHtml}</div>
             </div>
           </div>
         </div>
@@ -206,17 +193,68 @@ function App() {
               {copied ? "Copiado!" : "Copiar"}
             </button>
           </h2>
-          <div className="border-2 border-slate-500 mb-2 p-2 h-full bg-white overflow-x-auto overflow-y-hidden">
+          <div className="border-2 border-slate-500 mb-2 p-2 h-full bg-white dark:bg-slate-800 overflow-x-auto overflow-y-hidden">
             <textarea
-              className="w-full lg:h-full h-96 border-slate-400 border-2 p-2 lg:resize-none"
+              className="w-full lg:h-full h-96 border-slate-400 dark:text-slate-200 dark:bg-slate-600 border-2 p-2 lg:resize-none"
               value={formattedHtml}
               disabled={true}
             />
           </div>
         </div>
       </div>
-      <div className="">
-        Feito com ❤️ por Carlos Alberto Castelo @ IFCE <em>Campus</em> Canindé
+      <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
+        Informações
+      </h2>
+      <div className="border-2 border-slate-500 mb-2 p-2 bg-white dark:bg-slate-800 overflow-auto flex justify-center">
+        <div className="prose dark:prose-invert text-left">
+          <p>
+            Este app tem o objetivo de facilitar a tarefa manual repetitiva de
+            gerar as tabelas de frequência usada pelo IFCE, além de
+            automaticamente marcar os finais de semana corretamente.
+          </p>
+          <h4>O modo mais comum de uso é:</h4>
+          <ol>
+            <li>
+              Preencher os dados na seção <code>Configuração</code>.
+            </li>
+            <li>Selecionar o mês e ano.</li>
+            <li>Copiar o código HTML gerado</li>
+            <li>
+              Colar no documento do SEI (no modo "Código Fonte").
+              <ul>
+                <li>
+                  Recomenda-se substituir toda a tabela do modelo do SEI, que
+                  seria todo o código compreendendo <code>{"<table>"}</code> e{" "}
+                  <code>{"</table>"}</code>.
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h4>Mais informações:</h4>
+          <ul className="">
+            <li>
+              Você pode usar o botão <AiOutlineUserAdd className="inline m-0" />{" "}
+              para adicionar outro perfil e o botão{" "}
+              <AiOutlineUserDelete className="inline-block m-0" /> para remover
+              um perfil, isso pode ser útil se você precisar gerar tabelas para
+              diferentes servidores com frequência.
+            </li>
+            <li>
+              Os dados são armazenados localmente no navegador e não são
+              enviados para servidores externos.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="flex justify-center">
+        <div className="prose dark:prose-invert">
+          Feito com ❤️ por Carlos Alberto Castelo @ IFCE <em>Campus</em> Canindé
+          (
+          <a href="https://github.com/IFCE-Campus-Caninde/sei-controle-frequencia">
+            github
+          </a>
+          )
+        </div>
       </div>
     </div>
   );

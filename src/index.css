@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.new-style table td {
-  border: 1px solid;
+@layer components {
+  .new-style table td {
+    border: 1px solid;
+  }
+
+  .preview table {
+    background-color: white;
+  }
 }
