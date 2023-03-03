@@ -1,6 +1,7 @@
-import { useMemo, useState } from "react";
+import { ChangeEvent, ChangeEventHandler, useMemo, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
+import { AiOutlineUserAdd, AiOutlineUserDelete } from "react-icons/ai";
 import DaysTable from "./DaysTable";
 import ReactDOMServer from "react-dom/server";
 import prettier from "prettier/standalone";
@@ -22,31 +23,41 @@ const initialSettings: FreqData = {
 };
 
 interface SettingsStorage {
-  settings: FreqData;
+  profiles: FreqData[];
   additional: { newStyle?: boolean };
 }
 
 function getSettings(): SettingsStorage {
-  let settings: FreqData = initialSettings;
+  let profiles: FreqData[] = [initialSettings];
   let additional = { newStyle: true };
   try {
+    //Verifica e atualiza configuração antiga
     const set1 = localStorage.getItem("settings");
     if (set1) {
-      settings = JSON.parse(set1);
+      console.log("Atualizando dados antigos...");
+      profiles = [JSON.parse(set1)];
+      localStorage.removeItem("settings");
+      localStorage.setItem("profiles", JSON.stringify(profiles));
     }
+    const set3 = localStorage.getItem("profiles");
+    if (set3) {
+      profiles = JSON.parse(set3);
+      if (profiles.length === 0) {
+        profiles = [initialSettings];
+      }
+    }
+
     const set2 = localStorage.getItem("additional");
     if (set2) {
       additional = JSON.parse(set2);
     }
   } catch (e) {}
-
-  console.log(settings, additional);
-  return { settings, additional };
+  return { profiles, additional };
 }
 
-function saveSettings({ settings, additional }: SettingsStorage): void {
+function saveSettings({ profiles, additional }: SettingsStorage): void {
   try {
-    localStorage.setItem("settings", JSON.stringify(settings));
+    localStorage.setItem("profiles", JSON.stringify(profiles));
     localStorage.setItem("additional", JSON.stringify(additional));
   } catch (e) {}
 }
@@ -59,14 +70,18 @@ function App() {
     month: new Date().getMonth(),
     year: new Date().getFullYear(),
   };
-  const [settings, setSettings] = useState<FreqData>(store.settings);
+  const [selectedProfile, setSelectedProfile] = useState<number>(0);
+
+  const [profiles, setProfiles] = useState<FreqData[]>(store.profiles);
   const [month, setMonth] = useState<MonthData>(initialMonthData);
   const [copied, setCopied] = useState<boolean>(false);
-
-  //saveSettings({ settings, additional: { newStyle: month.newStyle } });
+  const settings = profiles[selectedProfile];
 
   const returnHtml = useMemo(() => {
-    saveSettings({ settings, additional: { newStyle: month.newStyle } });
+    saveSettings({
+      profiles,
+      additional: { newStyle: month.newStyle },
+    });
     setCopied(false);
     return (
       <>
@@ -78,12 +93,40 @@ function App() {
         />
       </>
     );
-  }, [month, settings]);
+  }, [month, profiles, selectedProfile]);
   const htmlString = ReactDOMServer.renderToString(returnHtml);
   const formattedHtml = prettier.format(htmlString, {
     parser: "html",
     plugins: [htmlParser],
   });
+
+  function onChangeSettingHandler(values: FreqData) {
+    const newProfiles = profiles.map((value, index) =>
+      index === selectedProfile ? values : value
+    );
+    setProfiles(newProfiles);
+  }
+
+  function deleteProfile() {
+    const newProfiles = profiles.filter(
+      (value, index) => index !== selectedProfile
+    );
+    setProfiles(newProfiles);
+    setSelectedProfile(newProfiles.length - 1);
+  }
+
+  function addProfile() {
+    const newProfiles = [...profiles, initialSettings];
+    setProfiles(newProfiles);
+    setSelectedProfile(newProfiles.length - 1);
+  }
+  function getProfileName(data: FreqData): string {
+    return `${data.servidor} - ${data.matricula}`;
+  }
+
+  function profileChangeHandler(e: ChangeEvent<HTMLSelectElement>) {
+    setSelectedProfile(parseInt(e.currentTarget.value));
+  }
 
   return (
     <div className="App">
@@ -101,10 +144,41 @@ function App() {
         </ul>
       </div>
       <h2 className="text-2xl font-bold text-slate-200 bg-slate-500 p-2">
+        <div className="lg:absolute flex-row flex items-center justify-center lg:justify-start h-8">
+          <button
+            className="px-1 text-center align-middle mr-1 hover:text-green-400"
+            onClick={addProfile}
+          >
+            <AiOutlineUserAdd />
+          </button>
+          {profiles.length > 1 ? (
+            <>
+              <select
+                className="text-slate-100 text-sm h-7 bg-slate-400 w-72 align-middle"
+                value={selectedProfile}
+                title="Adicionar Novo Perfil"
+                onChange={profileChangeHandler}
+              >
+                {profiles.map((value, index) => (
+                  <option key={index} value={index}>
+                    {getProfileName(value)}
+                  </option>
+                ))}
+              </select>
+              <button
+                className="px-1 text-center align-middle mr-1 hover:text-red-400"
+                title="Deletar Perfil"
+                onClick={deleteProfile}
+              >
+                <AiOutlineUserDelete />
+              </button>
+            </>
+          ) : null}
+        </div>
         Configuração
       </h2>
       <div className="border-2 border-slate-500 mb-2 p-2 bg-white overflow-auto">
-        <Settings OnChange={setSettings} initialValues={settings} />
+        <Settings OnChange={onChangeSettingHandler} initialValues={settings} />
         <TableSettings OnChange={setMonth} initialValues={initialMonthData} />
       </div>
 
